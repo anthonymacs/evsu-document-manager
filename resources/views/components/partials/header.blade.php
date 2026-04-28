@@ -18,9 +18,9 @@
                 <button @click="userMenuOpen = !userMenuOpen"
                     class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none transition-colors">
                     <div class="h-8 w-8 rounded-full bg-university-red text-white flex items-center justify-center font-semibold text-sm">
-                        {{ strtoupper(substr(auth()->user()->first_name, 0, 1) . substr(auth()->user()->last_name, 0, 1)) }}
+                        AD
                     </div>
-                    <span class="hidden sm:block text-sm font-medium">{{ auth()->user()->full_name }}</span>
+                    <span class="hidden sm:block text-sm font-medium">Admin User</span>
                     <svg class="h-4 w-4 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
@@ -38,15 +38,15 @@
                     style="display: none;">
                     
                     <div class="px-4 py-2 border-b border-gray-100">
-                        <p class="text-sm font-medium text-gray-900">{{ auth()->user()->full_name }}</p>
-                        <p class="text-xs text-gray-500 truncate">{{ auth()->user()->email }}</p>
+                        <p class="text-sm font-medium text-gray-900">Admin User</p>
+                        <p class="text-xs text-gray-500 truncate">admin@evsu.edu.ph</p>
                     </div>
                     
-                    <a wire:navigate href="{{ route("profile") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                    <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
                     <hr class="my-1">
                     
                     <button type="button"
-                        @click="userMenuOpen = false; logoutModalOpen = true"
+                        @click="userMenuOpen = false"
                         class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                         Logout
                     </button>
