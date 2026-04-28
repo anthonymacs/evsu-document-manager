@@ -1,15 +1,21 @@
+{{-- resources/views/components/partials/sidebar.blade.php --}}
+
 <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 z-[25] md:hidden" style="background: none;"
     aria-hidden="true">
 </div>
 
-<aside x-show="sidebarOpen" x-transition:enter="transition ease-in-out duration-300 transform"
-    x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
-    x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0"
-    x-transition:leave-end="-translate-x-full" :class="sidebarCollapsed ? 'w-20' : 'w-64'"
-    class="bg-university-red text-white fixed md:static inset-y-0 left-0 z-30 overflow-y-auto transition-all duration-300 shadow-lg flex flex-col"
-    style="display: none;">
+<aside x-show="sidebarOpen"
+    x-transition:enter="transition ease-in-out duration-300 transform"
+    x-transition:enter-start="-translate-x-full"
+    x-transition:enter-end="translate-x-0"
+    x-transition:leave="transition ease-in-out duration-300 transform"
+    x-transition:leave-start="translate-x-0"
+    x-transition:leave-end="-translate-x-full"
+    :class="sidebarCollapsed ? 'w-20' : 'w-64'"
+    class="bg-university-red text-white fixed md:static inset-y-0 left-0 z-30 overflow-y-auto transition-all duration-300 shadow-lg flex flex-col">
 
-    <a wire:navigate href="{{ route('home') }}"
+    {{-- Logo --}}
+    <a href="{{ route('home') }}"
         class="flex items-center justify-center h-20 border-b border-red-900 flex-shrink-0 hover:bg-black/10 transition-colors duration-200">
         <div class="flex items-center space-x-3">
             <img src="{{ asset('images/logo.jpg') }}" alt="EVSU Logo" class="w-12 h-12"
@@ -22,82 +28,57 @@
 
     <nav class="mt-6 px-3 flex-1 overflow-y-auto pb-20">
 
-        @can('view-dashboard')
-            <x-partials.sidebar-link href="{{ route('dashboard.index') }}" route="dashboard*" label="Dashboard">
-                <x-slot:icon>
-                    <x-partials.sidebar-icon path="M3 12l2-2 7-7 7 7" />
-                </x-slot:icon>
-            </x-partials.sidebar-link>
-        @endcan
+        {{-- Dashboard --}}
+        <a href="{{ route('dashboard.index') }}"
+            class="flex items-center py-3 px-4 mb-2 rounded-lg border-l-4 transition-all duration-200 hover:opacity-80
+                {{ request()->routeIs('dashboard*') ? 'border-white font-semibold bg-black/10' : 'border-transparent' }}">
+            <svg class="h-6 w-6 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span x-show="!sidebarCollapsed" x-transition class="ml-3">Dashboard</span>
+        </a>
 
-        @can('viewAny', App\Models\User::class)
-            <x-partials.sidebar-link href="{{ route('users.index') }}" route="users.*" label="Users">
-                <x-slot:icon>
-                    <x-partials.sidebar-icon path="M12 4a4 4 0 110 8 4 4 0 010-8zm-8 16a6 6 0 0116 0" />
-                </x-slot:icon>
-            </x-partials.sidebar-link>
-        @endcan
+        {{-- Categories --}}
+        <a href="{{ route('categories.index') }}"
+            class="flex items-center py-3 px-4 mb-2 rounded-lg border-l-4 transition-all duration-200 hover:opacity-80
+                {{ request()->routeIs('categories.*') ? 'border-white font-semibold bg-black/10' : 'border-transparent' }}">
+            <svg class="h-6 w-6 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            <span x-show="!sidebarCollapsed" x-transition class="ml-3">Categories</span>
+        </a>
 
-        @can('view-approvals')
-            <x-partials.sidebar-link href="{{ route('approvals.index') }}" route="approvals.*" label="Account Approvals">
-                <x-slot:icon>
-                    <x-partials.sidebar-icon path="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </x-slot:icon>
-            </x-partials.sidebar-link>
-        @endcan
+        {{-- Upload --}}
+        <a href="{{ route('uploads.index') }}"
+            class="flex items-center py-3 px-4 mb-2 rounded-lg border-l-4 transition-all duration-200 hover:opacity-80
+                {{ request()->routeIs('uploads.*') ? 'border-white font-semibold bg-black/10' : 'border-transparent' }}">
+            <svg class="h-6 w-6 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            <span x-show="!sidebarCollapsed" x-transition class="ml-3">Upload</span>
+        </a>
 
-        @can('viewAny', App\Models\Category::class)
-            <x-partials.sidebar-link href="{{ route('categories.index') }}" route="categories.*" label="Categories">
-                <x-slot:icon>
-                    <x-partials.sidebar-icon path="M7 3h5l7 7-7 7H7L3 12V7a4 4 0 014-4z" />
-                </x-slot:icon>
-            </x-partials.sidebar-link>
-        @endcan
+        {{-- Audit Logs --}}
+        <a href="{{ route('audit-logs.index') }}"
+            class="flex items-center py-3 px-4 mb-2 rounded-lg border-l-4 transition-all duration-200 hover:opacity-80
+                {{ request()->routeIs('audit-logs.*') ? 'border-white font-semibold bg-black/10' : 'border-transparent' }}">
+            <svg class="h-6 w-6 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            <span x-show="!sidebarCollapsed" x-transition class="ml-3">Audit Logs</span>
+        </a>
 
-        @can('create', App\Models\Document::class)
-            <x-partials.sidebar-link href="{{ route('uploads.index') }}" route="uploads.*" label="Upload">
-                <x-slot:icon>
-                    <x-partials.sidebar-icon path="M15 13l-3-3-3 3m3-3v12" />
-                </x-slot:icon>
-            </x-partials.sidebar-link>
-        @endcan
-
-        @can('viewAny', App\Models\Document::class)
-            <x-partials.sidebar-link href="{{ route('documents.index') }}" route="documents.*" label="Documents">
-                <x-slot:icon>
-                    <x-partials.sidebar-icon path="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586l5.414 5.414" />
-                </x-slot:icon>
-            </x-partials.sidebar-link>
-        @endcan
-
-        {{-- Read Later - Available for all authenticated users --}}
-        <x-partials.sidebar-link href="{{ route('read-later.index') }}" route="read-later.*" label="Read Later">
-            <x-slot:icon>
-                <div class="relative inline-block">
-                    <x-partials.sidebar-icon path="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                    @auth
-                        @livewire('read-later.unread-count')
-                    @endauth
-                </div>
-            </x-slot:icon>
-        </x-partials.sidebar-link>
-
-        @can('viewAny', App\Models\AuditLog::class)
-            <x-partials.sidebar-link href="{{ route('audit-logs.index') }}" route="audit-logs.*" label="Audit Logs">
-                <x-slot:icon>
-                    <x-partials.sidebar-icon
-                        path="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </x-slot:icon>
-            </x-partials.sidebar-link>
-        @endcan
-
-        <hr class="my-4 border-red-900" x-show="!sidebarCollapsed">
     </nav>
 
     <div class="border-t border-red-900 p-4 flex-shrink-0">
         <button @click="sidebarCollapsed = !sidebarCollapsed"
-            class="w-full text-sm font-medium opacity-80 hover:opacity-100 transition">
-            Collapse
+            class="w-full text-sm text-white font-medium opacity-80 hover:opacity-100 transition">
+            <span x-show="!sidebarCollapsed">Collapse</span>
+            <span x-show="sidebarCollapsed">›</span>
         </button>
     </div>
 </aside>

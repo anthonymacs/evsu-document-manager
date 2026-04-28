@@ -8,4 +8,22 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-university-red: #9B1C1C;
+}
+
+@utility bg-university-red {
+    background-color: #9B1C1C;
+}
+
+@utility text-university-red {
+    color: #9B1C1C;
+}
+
+@utility border-university-red {
+    border-color: #9B1C1C;
+}
+
+@utility border-b-university-red {
+    border-bottom-color: #9B1C1C;
 }
