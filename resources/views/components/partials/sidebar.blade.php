@@ -50,15 +50,15 @@
             <span x-show="!sidebarCollapsed" x-transition class="ml-3">Categories</span>
         </a>
 
-        {{-- Upload --}}
-        <a href="{{ route('uploads.index') }}"
+        {{-- Documents --}}
+        <a href="{{ route('documents.index') }}"
             class="flex items-center py-3 px-4 mb-2 rounded-lg border-l-4 transition-all duration-200 hover:opacity-80
-                {{ request()->routeIs('uploads.*') ? 'border-white font-semibold bg-black/10' : 'border-transparent' }}">
+        {{ request()->routeIs('documents.*') ? 'border-white font-semibold bg-black/10' : 'border-transparent' }}">
             <svg class="h-6 w-6 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586l5.414 5.414V19a2 2 0 01-2 2z" />
             </svg>
-            <span x-show="!sidebarCollapsed" x-transition class="ml-3">Upload</span>
+            <span x-show="!sidebarCollapsed" x-transition class="ml-3">Documents</span>
         </a>
 
         {{-- Audit Logs --}}
