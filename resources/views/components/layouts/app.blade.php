@@ -41,7 +41,6 @@
     </div>
 
     @stack('scripts')
-    @livewireScripts
     <script>
         function adminLayout() {
             return {
