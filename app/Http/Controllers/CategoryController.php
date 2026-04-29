@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Category::query();
+        $query = Category::withCount('documents');
 
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
@@ -49,7 +49,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $existing = Category::where('id', '!=', $category->id)->latest()->get();
-        return view('categories.edit-page', compact('category', 'existing'));
+        return view('categories.update', compact('category', 'existing'));
     }
 
     public function update(Request $request, Category $category)
