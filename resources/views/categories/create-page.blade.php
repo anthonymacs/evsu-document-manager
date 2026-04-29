@@ -34,16 +34,6 @@
                             class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
                     </div>
 
-                    {{-- Slug --}}
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
-                            Slug
-                        </label>
-                        <input type="text" placeholder="e.g. csr, teaching-load..."
-                            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
-                        <p class="text-xs text-gray-400 mt-1">Auto-generated from name. Used in URLs.</p>
-                    </div>
-
                     {{-- Description --}}
                     <div>
                         <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">

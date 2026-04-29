@@ -4,7 +4,7 @@
     <div class="flex justify-between items-center mb-6">
         <div>
             <h2 class="text-2xl font-bold text-gray-800">Documents</h2>
-            <p class="text-sm text-gray-500 mt-1">All student document submissions.</p>
+            <p class="text-sm text-gray-500 mt-1">All faculty document submissions.</p>
         </div>
         <a href="{{ route('documents.create') }}"
             class="bg-university-red text-white px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition flex items-center gap-2">
@@ -14,7 +14,7 @@
 
     {{-- Filters --}}
     <div class="bg-white rounded-xl shadow-sm p-4 mb-6 flex flex-wrap gap-3 items-center">
-        <input type="text" placeholder="Search student name..."
+        <input type="text" placeholder="Search faculty name..."
             class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-university-red/20 focus:border-university-red flex-1 min-w-48">
         <select class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-university-red/20 focus:border-university-red">
             <option>All Categories</option>
@@ -45,8 +45,7 @@
                 <thead>
                     <tr class="bg-gray-50 text-xs text-gray-500 uppercase tracking-wide">
                         <th class="px-6 py-3 text-left">#</th>
-                        <th class="px-6 py-3 text-left">Student Name</th>
-                        <th class="px-6 py-3 text-left">Student ID</th>
+                        <th class="px-6 py-3 text-left">Faculty Name</th>
                         <th class="px-6 py-3 text-left">Category</th>
                         <th class="px-6 py-3 text-left">Status</th>
                         <th class="px-6 py-3 text-left">Remarks</th>
@@ -57,31 +56,31 @@
                 <tbody class="divide-y divide-gray-100">
                     @php
                     $docs = [
-                    ['id' => 1, 'name' => 'John Jaro', 'sid' => '2021-00101', 'category' => 'CSR', 'cat_color' => 'blue', 'status' => 'submitted', 'remarks' => 'Hard copy submitted', 'date' => 'Apr 28, 2026'],
-                    ['id' => 2, 'name' => 'Maria Santos', 'sid' => '2021-00102', 'category' => 'Syllabus', 'cat_color' => 'red', 'status' => 'approved', 'remarks' => 'Original document', 'date' => 'Apr 27, 2026'],
-                    ['id' => 3, 'name' => 'Carlo Reyes', 'sid' => '2021-00103', 'category' => 'Teaching Load', 'cat_color' => 'green', 'status' => 'reviewed', 'remarks' => '—', 'date' => 'Apr 27, 2026'],
-                    ['id' => 4, 'name' => 'Ana Dela Cruz', 'sid' => '2021-00104', 'category' => 'Clearance Letter','cat_color' => 'yellow', 'status' => 'approved', 'remarks' => 'Verified', 'date' => 'Apr 26, 2026'],
-                    ['id' => 5, 'name' => 'Jose Mendoza', 'sid' => '2021-00105', 'category' => 'PR', 'cat_color' => 'purple', 'status' => 'rejected', 'remarks' => 'Incomplete form', 'date' => 'Apr 26, 2026'],
-                    ['id' => 6, 'name' => 'Liza Bautista', 'sid' => '2021-00106', 'category' => 'CSR', 'cat_color' => 'blue', 'status' => 'submitted', 'remarks' => '—', 'date' => 'Apr 25, 2026'],
-                    ['id' => 7, 'name' => 'Ramon Villanueva', 'sid' => '2021-00107', 'category' => 'Syllabus', 'cat_color' => 'red', 'status' => 'reviewed', 'remarks' => 'For revision', 'date' => 'Apr 25, 2026'],
-                    ['id' => 8, 'name' => 'Grace Florendo', 'sid' => '2021-00108', 'category' => 'Teaching Load', 'cat_color' => 'green', 'status' => 'approved', 'remarks' => '—', 'date' => 'Apr 24, 2026'],
-                    ['id' => 9, 'name' => 'Mark Escoto', 'sid' => '2021-00109', 'category' => 'CSR', 'cat_color' => 'blue', 'status' => 'submitted', 'remarks' => 'Hard copy submitted', 'date' => 'Apr 24, 2026'],
-                    ['id' => 10, 'name' => 'Nina Catalan', 'sid' => '2021-00110', 'category' => 'PR', 'cat_color' => 'purple', 'status' => 'approved', 'remarks' => '—', 'date' => 'Apr 23, 2026'],
+                        ['id' => 1,  'name' => 'John Jaro',        'category' => 'CSR',           'cat_color' => 'blue',   'status' => 'submitted', 'remarks' => 'Hard copy submitted', 'date' => 'Apr 28, 2026'],
+                        ['id' => 2,  'name' => 'Maria Santos',     'category' => 'Syllabus',      'cat_color' => 'red',    'status' => 'approved',  'remarks' => 'Original document',   'date' => 'Apr 27, 2026'],
+                        ['id' => 3,  'name' => 'Carlo Reyes',      'category' => 'Teaching Load', 'cat_color' => 'green',  'status' => 'reviewed',  'remarks' => '—',                   'date' => 'Apr 27, 2026'],
+                        ['id' => 4,  'name' => 'Ana Dela Cruz',    'category' => 'Clearance Letter','cat_color' => 'yellow','status' => 'approved',  'remarks' => 'Verified',            'date' => 'Apr 26, 2026'],
+                        ['id' => 5,  'name' => 'Jose Mendoza',     'category' => 'PR',            'cat_color' => 'purple', 'status' => 'rejected',  'remarks' => 'Incomplete form',     'date' => 'Apr 26, 2026'],
+                        ['id' => 6,  'name' => 'Liza Bautista',    'category' => 'CSR',           'cat_color' => 'blue',   'status' => 'submitted', 'remarks' => '—',                   'date' => 'Apr 25, 2026'],
+                        ['id' => 7,  'name' => 'Ramon Villanueva', 'category' => 'Syllabus',      'cat_color' => 'red',    'status' => 'reviewed',  'remarks' => 'For revision',        'date' => 'Apr 25, 2026'],
+                        ['id' => 8,  'name' => 'Grace Florendo',   'category' => 'Teaching Load', 'cat_color' => 'green',  'status' => 'approved',  'remarks' => '—',                   'date' => 'Apr 24, 2026'],
+                        ['id' => 9,  'name' => 'Mark Escoto',      'category' => 'CSR',           'cat_color' => 'blue',   'status' => 'submitted', 'remarks' => 'Hard copy submitted', 'date' => 'Apr 24, 2026'],
+                        ['id' => 10, 'name' => 'Nina Catalan',     'category' => 'PR',            'cat_color' => 'purple', 'status' => 'approved',  'remarks' => '—',                   'date' => 'Apr 23, 2026'],
                     ];
 
                     $statusColors = [
-                    'submitted' => 'bg-yellow-100 text-yellow-800',
-                    'reviewed' => 'bg-blue-100 text-blue-800',
-                    'approved' => 'bg-green-100 text-green-800',
-                    'rejected' => 'bg-red-100 text-red-800',
+                        'submitted' => 'bg-yellow-100 text-yellow-800',
+                        'reviewed'  => 'bg-blue-100 text-blue-800',
+                        'approved'  => 'bg-green-100 text-green-800',
+                        'rejected'  => 'bg-red-100 text-red-800',
                     ];
 
                     $catColors = [
-                    'blue' => 'bg-blue-100 text-blue-700',
-                    'green' => 'bg-green-100 text-green-700',
-                    'yellow' => 'bg-yellow-100 text-yellow-700',
-                    'red' => 'bg-red-100 text-red-700',
-                    'purple' => 'bg-purple-100 text-purple-700',
+                        'blue'   => 'bg-blue-100 text-blue-700',
+                        'green'  => 'bg-green-100 text-green-700',
+                        'yellow' => 'bg-yellow-100 text-yellow-700',
+                        'red'    => 'bg-red-100 text-red-700',
+                        'purple' => 'bg-purple-100 text-purple-700',
                     ];
                     @endphp
 
@@ -96,7 +95,6 @@
                                 {{ $doc['name'] }}
                             </div>
                         </td>
-                        <td class="px-6 py-3 text-gray-500 text-xs">{{ $doc['sid'] }}</td>
                         <td class="px-6 py-3">
                             <span class="px-2 py-1 rounded-md text-xs font-semibold {{ $catColors[$doc['cat_color']] }}">
                                 {{ $doc['category'] }}

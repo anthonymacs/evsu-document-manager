@@ -4,7 +4,7 @@
     <div class="flex justify-between items-center mb-6">
         <div>
             <h2 class="text-2xl font-bold text-gray-800">Log Document Submission</h2>
-            <p class="text-sm text-gray-500 mt-1">Record a student's document submission.</p>
+            <p class="text-sm text-gray-500 mt-1">Record a faculty member's document submission.</p>
         </div>
         <a href="{{ route('documents.index') }}"
             class="border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition flex items-center gap-2">
@@ -25,22 +25,12 @@
                 </div>
                 <div class="p-6 space-y-5">
 
-                    {{-- Student Name --}}
+                    {{-- Faculty Name --}}
                     <div>
                         <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
-                            Student Name <span class="text-red-500">*</span>
+                            Faculty Name <span class="text-red-500">*</span>
                         </label>
                         <input type="text" placeholder="e.g. John Jaro"
-                            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
-                    </div>
-
-                    {{-- Student ID --}}
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
-                            Student ID
-                            <span class="text-gray-400 font-normal normal-case tracking-normal ml-1">(optional)</span>
-                        </label>
-                        <input type="text" placeholder="e.g. 2021-00101"
                             class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
                     </div>
 
