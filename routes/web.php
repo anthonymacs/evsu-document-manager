@@ -1,22 +1,20 @@
 <?php
 
-// routes/web.php
-
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 
 Route::get('/', function () {
-    return view('homepage');
-})->name('homepage');
+    return redirect()->route('dashboard.index');
+});
 
 Route::get('/home', function () {
     return redirect()->route('dashboard.index');
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->name('dashboard.index');
+// Dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 // Categories
 Route::resource('categories', CategoryController::class)->except(['show']);
