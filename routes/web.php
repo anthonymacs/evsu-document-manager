@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DocumentController;
 
 Route::get('/', function () {
     return redirect()->route('dashboard.index');
@@ -14,21 +16,11 @@ Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->name('dashboard.index');
 
-Route::get('/categories', function () {
-    return view('categories.index');
-})->name('categories.index');
+// Categories
+Route::resource('categories', CategoryController::class)->except(['show']);
 
-Route::get('/categories/create', function () {
-    return view('categories.create-page');
-})->name('categories.create');
-
-Route::get('/documents', function () {
-    return view('documents.index');
-})->name('documents.index');
-
-Route::get('/documents/create', function () {
-    return view('documents.create-page');
-})->name('documents.create');
+// Documents
+Route::resource('documents', DocumentController::class)->except(['show']);
 
 Route::get('/audit-logs', function () {
     return view('auditlogs.index');

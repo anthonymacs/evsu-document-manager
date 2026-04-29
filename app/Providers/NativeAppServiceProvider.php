@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Native\Desktop\Facades\Window;
 use Native\Desktop\Contracts\ProvidesPhpIni;
+use Illuminate\Support\Facades\Artisan;
 
 class NativeAppServiceProvider implements ProvidesPhpIni
 {
@@ -13,6 +14,12 @@ class NativeAppServiceProvider implements ProvidesPhpIni
      */
     public function boot(): void
     {
+        // ✅ Auto-run migrations on every app boot
+        Artisan::call('migrate', [
+            '--force'    => true,
+            '--database' => 'nativephp',
+        ]);
+
         Window::open();
     }
 
@@ -21,7 +28,6 @@ class NativeAppServiceProvider implements ProvidesPhpIni
      */
     public function phpIni(): array
     {
-        return [
-        ];
+        return [];
     }
 }
