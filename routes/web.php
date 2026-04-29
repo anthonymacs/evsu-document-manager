@@ -6,8 +6,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 
 Route::get('/', function () {
-    return redirect()->route('dashboard.index');
-});
+    return redirect()->route('homepage');
+})->name('homepage');
+
+//Route::get('/', function () {
+//    return redirect()->route('dashboard.index');
+//});
 
 Route::get('/home', function () {
     return redirect()->route('dashboard.index');
