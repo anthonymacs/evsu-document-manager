@@ -6,27 +6,28 @@
             <h2 class="text-2xl font-bold text-gray-800">Categories</h2>
             <p class="text-sm text-gray-500 mt-1">Manage document submission categories.</p>
         </div>
-        <button class="bg-university-red text-white px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition">
+        <a href="{{ route('categories.create') }}"
+            class="bg-university-red text-white px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition flex items-center gap-2">
             + Add Category
-        </button>
+        </a>
     </div>
 
     {{-- Stats Row --}}
     <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8">
         @php
         $catStats = [
-            ['name' => 'CSR',             'count' => 24, 'color' => 'blue'],
-            ['name' => 'Teaching Load',   'count' => 18, 'color' => 'green'],
-            ['name' => 'Clearance Letter','count' => 15, 'color' => 'yellow'],
-            ['name' => 'Syllabus',        'count' => 17, 'color' => 'red'],
-            ['name' => 'PR',              'count' => 13, 'color' => 'purple'],
+        ['name' => 'CSR', 'count' => 24, 'color' => 'blue'],
+        ['name' => 'Teaching Load', 'count' => 18, 'color' => 'green'],
+        ['name' => 'Clearance Letter','count' => 15, 'color' => 'yellow'],
+        ['name' => 'Syllabus', 'count' => 17, 'color' => 'red'],
+        ['name' => 'PR', 'count' => 13, 'color' => 'purple'],
         ];
         $statColors = [
-            'blue'   => ['bg' => 'bg-blue-50',   'text' => 'text-blue-700',   'border' => 'border-blue-500'],
-            'green'  => ['bg' => 'bg-green-50',  'text' => 'text-green-700',  'border' => 'border-green-500'],
-            'yellow' => ['bg' => 'bg-yellow-50', 'text' => 'text-yellow-700', 'border' => 'border-yellow-500'],
-            'red'    => ['bg' => 'bg-red-50',    'text' => 'text-red-700',    'border' => 'border-red-500'],
-            'purple' => ['bg' => 'bg-purple-50', 'text' => 'text-purple-700', 'border' => 'border-purple-500'],
+        'blue' => ['bg' => 'bg-blue-50', 'text' => 'text-blue-700', 'border' => 'border-blue-500'],
+        'green' => ['bg' => 'bg-green-50', 'text' => 'text-green-700', 'border' => 'border-green-500'],
+        'yellow' => ['bg' => 'bg-yellow-50', 'text' => 'text-yellow-700', 'border' => 'border-yellow-500'],
+        'red' => ['bg' => 'bg-red-50', 'text' => 'text-red-700', 'border' => 'border-red-500'],
+        'purple' => ['bg' => 'bg-purple-50', 'text' => 'text-purple-700', 'border' => 'border-purple-500'],
         ];
         @endphp
         @foreach($catStats as $stat)
@@ -58,11 +59,11 @@
             <tbody class="divide-y divide-gray-100">
                 @php
                 $categories = [
-                    ['id' => 1, 'name' => 'CSR',             'desc' => 'Community Service Record',   'count' => 24, 'color' => 'blue',   'active' => true],
-                    ['id' => 2, 'name' => 'Teaching Load',   'desc' => 'Faculty Teaching Load Docs', 'count' => 18, 'color' => 'green',  'active' => true],
-                    ['id' => 3, 'name' => 'Clearance Letter','desc' => 'Student Clearance Letters',  'count' => 15, 'color' => 'yellow', 'active' => true],
-                    ['id' => 4, 'name' => 'Syllabus',        'desc' => 'Course Syllabi',             'count' => 17, 'color' => 'red',    'active' => true],
-                    ['id' => 5, 'name' => 'PR',              'desc' => 'Progress Reports',           'count' => 13, 'color' => 'purple', 'active' => false],
+                ['id' => 1, 'name' => 'CSR', 'desc' => 'Community Service Record', 'count' => 24, 'color' => 'blue', 'active' => true],
+                ['id' => 2, 'name' => 'Teaching Load', 'desc' => 'Faculty Teaching Load Docs', 'count' => 18, 'color' => 'green', 'active' => true],
+                ['id' => 3, 'name' => 'Clearance Letter','desc' => 'Student Clearance Letters', 'count' => 15, 'color' => 'yellow', 'active' => true],
+                ['id' => 4, 'name' => 'Syllabus', 'desc' => 'Course Syllabi', 'count' => 17, 'color' => 'red', 'active' => true],
+                ['id' => 5, 'name' => 'PR', 'desc' => 'Progress Reports', 'count' => 13, 'color' => 'purple', 'active' => false],
                 ];
                 @endphp
                 @foreach($categories as $cat)
@@ -80,9 +81,9 @@
                     </td>
                     <td class="px-6 py-4">
                         @if($cat['active'])
-                            <span class="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Active</span>
+                        <span class="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Active</span>
                         @else
-                            <span class="px-2 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-500">Inactive</span>
+                        <span class="px-2 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-500">Inactive</span>
                         @endif
                     </td>
                     <td class="px-6 py-4">
