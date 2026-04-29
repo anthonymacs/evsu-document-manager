@@ -43,8 +43,17 @@ return [
             'synchronous' => null,
             'transaction_mode' => 'DEFERRED',
         ],
+        'nativephp' => [
+            'driver'                  => 'sqlite',
+            'database'                => database_path('nativephp.sqlite'),
+            'prefix'                  => '',
+            'foreign_key_constraints' => true,
+            'busy_timeout'            => null,
+            'journal_mode'            => null,
+            'synchronous'             => null,
+        ],
 
-        'mysql' => [
+        'mysql' => [`
             'driver' => 'mysql',
             'url' => env('DB_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -149,7 +158,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug((string) env('APP_NAME', 'laravel')).'-database-'),
+            'prefix' => env('REDIS_PREFIX', Str::slug((string) env('APP_NAME', 'laravel')) . '-database-'),
             'persistent' => env('REDIS_PERSISTENT', false),
         ],
 

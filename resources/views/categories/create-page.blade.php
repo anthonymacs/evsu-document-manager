@@ -23,6 +23,8 @@
                 <div class="px-6 py-4 border-b">
                     <h3 class="text-base font-semibold text-gray-800">Category Details</h3>
                 </div>
+                <form method="POST" action="{{ route('categories.store') }}">
+                @csrf
                 <div class="p-6 space-y-5">
 
                     {{-- Category Name --}}
@@ -30,18 +32,12 @@
                         <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
                             Category Name <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" placeholder="e.g. CSR, Teaching Load, Syllabus..."
-                            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
-                    </div>
-
-                    {{-- Slug --}}
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
-                            Slug
-                        </label>
-                        <input type="text" placeholder="e.g. csr, teaching-load..."
-                            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
-                        <p class="text-xs text-gray-400 mt-1">Auto-generated from name. Used in URLs.</p>
+                        <input type="text" name="name" value="{{ old('name') }}"
+                            placeholder="e.g. CSR, Teaching Load, Syllabus..."
+                            class="w-full px-4 py-2.5 bg-gray-50 border {{ $errors->has('name') ? 'border-red-400' : 'border-gray-200' }} rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
+                        @error('name')
+                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     {{-- Description --}}
@@ -49,8 +45,9 @@
                         <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
                             Description
                         </label>
-                        <textarea rows="3" placeholder="Brief description of this category..."
-                            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all resize-none"></textarea>
+                        <textarea name="description" rows="3"
+                            placeholder="Brief description of this category..."
+                            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all resize-none">{{ old('description') }}</textarea>
                     </div>
 
                     {{-- Color --}}
@@ -73,12 +70,17 @@
                             @endphp
                             @foreach($colors as $color)
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="color" value="{{ $color['value'] }}" class="hidden peer">
+                                <input type="radio" name="color" value="{{ $color['value'] }}"
+                                    class="hidden peer"
+                                    {{ old('color', 'blue') === $color['value'] ? 'checked' : '' }}>
                                 <div class="w-7 h-7 rounded-full {{ $color['bg'] }} peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-gray-400 transition cursor-pointer"></div>
                                 <span class="text-xs text-gray-500">{{ $color['label'] }}</span>
                             </label>
                             @endforeach
                         </div>
+                        @error('color')
+                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     {{-- Status --}}
@@ -86,9 +88,9 @@
                         <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
                             Status
                         </label>
-                        <select class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                        <select name="status" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
+                            <option value="active" {{ old('status') === 'active' ? 'selected' : '' }}>Active</option>
+                            <option value="inactive" {{ old('status') === 'inactive' ? 'selected' : '' }}>Inactive</option>
                         </select>
                     </div>
 
@@ -105,6 +107,7 @@
                     </div>
 
                 </div>
+                </form>
             </div>
         </div>
 
@@ -116,22 +119,28 @@
                 <h3 class="text-base font-semibold text-gray-800 mb-4">Existing Categories</h3>
                 <div class="space-y-2">
                     @php
-                    $existing = [
-                        ['name' => 'CSR',             'count' => 24, 'bg' => 'bg-blue-100',   'text' => 'text-blue-700'],
-                        ['name' => 'Teaching Load',   'count' => 18, 'bg' => 'bg-green-100',  'text' => 'text-green-700'],
-                        ['name' => 'Clearance Letter','count' => 15, 'bg' => 'bg-yellow-100', 'text' => 'text-yellow-700'],
-                        ['name' => 'Syllabus',        'count' => 17, 'bg' => 'bg-red-100',    'text' => 'text-red-700'],
-                        ['name' => 'PR',              'count' => 13, 'bg' => 'bg-purple-100', 'text' => 'text-purple-700'],
+                    $sideColors = [
+                        'blue'   => ['bg' => 'bg-blue-100',   'text' => 'text-blue-700'],
+                        'green'  => ['bg' => 'bg-green-100',  'text' => 'text-green-700'],
+                        'yellow' => ['bg' => 'bg-yellow-100', 'text' => 'text-yellow-700'],
+                        'red'    => ['bg' => 'bg-red-100',    'text' => 'text-red-700'],
+                        'purple' => ['bg' => 'bg-purple-100', 'text' => 'text-purple-700'],
+                        'pink'   => ['bg' => 'bg-pink-100',   'text' => 'text-pink-700'],
+                        'indigo' => ['bg' => 'bg-indigo-100', 'text' => 'text-indigo-700'],
+                        'orange' => ['bg' => 'bg-orange-100', 'text' => 'text-orange-700'],
                     ];
                     @endphp
-                    @foreach($existing as $e)
+                    @forelse($existing as $e)
+                    @php $sc = $sideColors[$e->color] ?? $sideColors['blue']; @endphp
                     <div class="flex justify-between items-center py-2 border-b border-gray-50 last:border-0">
-                        <span class="px-2 py-1 rounded-md text-xs font-bold {{ $e['bg'] }} {{ $e['text'] }}">
-                            {{ $e['name'] }}
+                        <span class="px-2 py-1 rounded-md text-xs font-bold {{ $sc['bg'] }} {{ $sc['text'] }}">
+                            {{ $e->name }}
                         </span>
-                        <span class="text-xs text-gray-400">{{ $e['count'] }} submissions</span>
+                        <span class="text-xs text-gray-400">{{ $e->status }}</span>
                     </div>
-                    @endforeach
+                    @empty
+                    <p class="text-xs text-gray-400">No categories yet.</p>
+                    @endforelse
                 </div>
             </div>
 
