@@ -1,12 +1,14 @@
 <?php
 
+// routes/web.php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 
 Route::get('/', function () {
-    return redirect()->route('dashboard.index');
-});
+    return view('homepage');
+})->name('homepage');
 
 Route::get('/home', function () {
     return redirect()->route('dashboard.index');
