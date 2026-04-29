@@ -1,7 +1,5 @@
 <?php
 
-// routes/web.php
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,9 +18,17 @@ Route::get('/categories', function () {
     return view('categories.index');
 })->name('categories.index');
 
+Route::get('/categories/create', function () {
+    return view('categories.create-page');
+})->name('categories.create');
+
 Route::get('/documents', function () {
     return view('documents.index');
 })->name('documents.index');
+
+Route::get('/documents/create', function () {
+    return view('documents.create-page');
+})->name('documents.create');
 
 Route::get('/audit-logs', function () {
     return view('auditlogs.index');
