@@ -5,14 +5,13 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 
+
+
 Route::get('/', function () {
-    return redirect()->route('homepage');
+    return view('homepage.index');
 })->name('homepage');
 
-//Route::get('/', function () {
-//    return redirect()->route('dashboard.index');
-//});
-
+// Optional: redirect /home to dashboard
 Route::get('/home', function () {
     return redirect()->route('dashboard.index');
 })->name('home');
@@ -26,26 +25,32 @@ Route::resource('categories', CategoryController::class)->except(['show']);
 // Documents
 Route::resource('documents', DocumentController::class)->except(['show']);
 
+// Audit Logs
 Route::get('/audit-logs', function () {
     return view('auditlogs.index');
 })->name('audit-logs.index');
 
+// Profile
 Route::get('/profile', function () {
     return view('dashboard.index');
 })->name('profile');
 
+// Users
 Route::get('/users', function () {
     return view('dashboard.index');
 })->name('users.index');
 
+// Approvals
 Route::get('/approvals', function () {
     return view('dashboard.index');
 })->name('approvals.index');
 
+// Uploads
 Route::get('/uploads', function () {
     return view('dashboard.index');
 })->name('uploads.index');
 
+// Read Later
 Route::get('/read-later', function () {
     return view('dashboard.index');
 })->name('read-later.index');
