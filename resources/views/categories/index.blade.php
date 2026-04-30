@@ -15,16 +15,6 @@
 </style>
 @endpush
 
-{{-- Success --}}
-@if(session('success'))
-<div class="mb-5 flex items-center gap-2 px-4 py-3 bg-green-50 border border-green-200 text-green-700 rounded-xl text-sm font-medium animate-fade-up">
-    <svg class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-    </svg>
-    {{ session('success') }}
-</div>
-@endif
-
 {{-- Header --}}
 <div class="flex flex-wrap justify-between items-start gap-4 mb-8 animate-fade-up">
     <div>
@@ -51,13 +41,13 @@ $statColors = [
     'indigo' => ['bg' => 'bg-indigo-50', 'text' => 'text-indigo-700', 'border' => 'border-indigo-500', 'bar' => 'bg-indigo-400'],
     'orange' => ['bg' => 'bg-orange-50', 'text' => 'text-orange-700', 'border' => 'border-orange-500', 'bar' => 'bg-orange-400'],
 ];
-$totalDocs = $categories->sum('documents_count');
+$totalDocs = $statCategories->sum('documents_count');
 @endphp
 
 {{-- Stat Cards --}}
-@if($categories->count())
+@if($statCategories->count())
 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8 animate-fade-up-delay-1">
-    @foreach($categories->take(5) as $i => $stat)
+    @foreach($statCategories->take(5) as $stat)
     @php $sc = $statColors[$stat->color] ?? $statColors['blue']; @endphp
     <div class="stat-card bg-white rounded-2xl shadow-sm p-4 border-t-4 {{ $sc['border'] }}">
         <p class="text-3xl font-black {{ $sc['text'] }}">{{ $stat->documents_count ?? 0 }}</p>
@@ -76,7 +66,7 @@ $totalDocs = $categories->sum('documents_count');
     <div class="px-6 py-4 border-b border-gray-100 flex flex-wrap justify-between items-center gap-3">
         <div>
             <h3 class="text-base font-semibold text-gray-800">All Categories</h3>
-            <p class="text-xs text-gray-400 mt-0.5">{{ $categories->count() }} categories total</p>
+            <p class="text-xs text-gray-400 mt-0.5">{{ $categories->total() }} categories total</p>
         </div>
         <form method="GET" action="{{ route('categories.index') }}" class="flex items-center gap-2">
             <div class="relative">
@@ -178,6 +168,9 @@ $totalDocs = $categories->sum('documents_count');
             </tbody>
         </table>
     </div>
+
+    {{-- Pagination --}}
+    <x-ui.pagination :paginator="$categories" />
 </div>
 
 </x-layouts.app>

@@ -12,7 +12,6 @@
         }
     </style>
     @stack('styles')
-   
 </head>
 
 <body class="bg-gray-50 font-sans antialiased">
@@ -37,7 +36,9 @@
         <livewire:auth.logout />
         <x-ui.confirmation-modal />
 
+        {{-- Toast Notification (only once, inside body) --}}
         <x-ui.toast />
+
     </div>
 
     @stack('scripts')

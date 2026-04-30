@@ -14,16 +14,6 @@
 </style>
 @endpush
 
-{{-- Success --}}
-@if(session('success'))
-<div class="mb-5 flex items-center gap-2 px-4 py-3 bg-green-50 border border-green-200 text-green-700 rounded-xl text-sm font-medium animate-fade-up">
-    <svg class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-    </svg>
-    {{ session('success') }}
-</div>
-@endif
-
 {{-- Header --}}
 <div class="flex flex-wrap justify-between items-start gap-4 mb-8 animate-fade-up">
     <div>
@@ -42,10 +32,10 @@
 {{-- Quick Stats --}}
 @php
 $statusMeta = [
-    'submitted' => ['label' => 'Submitted', 'bg' => 'bg-yellow-50', 'border' => 'border-yellow-200', 'text' => 'text-yellow-700', 'bar' => 'bg-yellow-400'],
-    'reviewed'  => ['label' => 'Reviewed',  'bg' => 'bg-blue-50',   'border' => 'border-blue-200',   'text' => 'text-blue-700',   'bar' => 'bg-blue-400'],
-    'approved'  => ['label' => 'Approved',  'bg' => 'bg-green-50',  'border' => 'border-green-200',  'text' => 'text-green-700',  'bar' => 'bg-green-400'],
-    'rejected'  => ['label' => 'Rejected',  'bg' => 'bg-red-50',    'border' => 'border-red-200',    'text' => 'text-red-700',    'bar' => 'bg-red-400'],
+    'submitted' => ['label' => 'Submitted', 'bg' => 'bg-yellow-50', 'border' => 'border-yellow-200', 'text' => 'text-yellow-700'],
+    'reviewed'  => ['label' => 'Reviewed',  'bg' => 'bg-blue-50',   'border' => 'border-blue-200',   'text' => 'text-blue-700'],
+    'approved'  => ['label' => 'Approved',  'bg' => 'bg-green-50',  'border' => 'border-green-200',  'text' => 'text-green-700'],
+    'rejected'  => ['label' => 'Rejected',  'bg' => 'bg-red-50',    'border' => 'border-red-200',    'text' => 'text-red-700'],
 ];
 @endphp
 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6 animate-fade-up-delay-1">
@@ -53,7 +43,7 @@ $statusMeta = [
     <a href="{{ route('documents.index') }}?status={{ $key }}"
         class="stat-card bg-white rounded-2xl border {{ $meta['border'] }} p-4 {{ request('status') === $key ? 'ring-2 ring-offset-1 ring-university-red' : '' }}">
         <p class="text-2xl font-black {{ $meta['text'] }}">
-            {{ $documents->where('status', $key)->count() }}
+            {{ $statusCounts[$key] ?? 0 }}
         </p>
         <p class="text-xs text-gray-500 font-medium mt-0.5">{{ $meta['label'] }}</p>
     </a>
@@ -211,16 +201,7 @@ $statusMeta = [
     </div>
 
     {{-- Pagination --}}
-    <div class="px-6 py-4 border-t border-gray-50 bg-gray-50 flex flex-wrap justify-between items-center gap-3 text-xs text-gray-500">
-        <span>
-            @if($documents->total() > 0)
-                Showing {{ $documents->firstItem() }}–{{ $documents->lastItem() }} of {{ $documents->total() }} results
-            @else
-                No results found
-            @endif
-        </span>
-        {{ $documents->withQueryString()->links() }}
-    </div>
+    <x-ui.pagination :paginator="$documents" />
 </div>
 
 </x-layouts.app>

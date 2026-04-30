@@ -24,20 +24,23 @@ class DocumentController extends Controller
             $query->where('status', $request->status);
         }
 
-        $documents = $query->paginate(10);
-        $categories = Category::orderBy('name')->get();
-        $total = Document::count();
+        $documents   = $query->paginate(10)->withQueryString();
+        $categories  = Category::orderBy('name')->get();
+        $total       = Document::count();
 
-        return view('documents.index', compact('documents', 'categories', 'total'));
+        // Counts per status across ALL records (not just current page)
+        $statusCounts = Document::selectRaw('status, count(*) as count')
+            ->groupBy('status')
+            ->pluck('count', 'status');
+
+        return view('documents.index', compact('documents', 'categories', 'total', 'statusCounts'));
     }
 
     public function create()
     {
         $categories = Category::orderBy('name')->get();
-        $recent = Document::with('category')->latest()->take(5)->get();
-
-        // Category summary for sidebar bars
-        $catStats = Category::withCount('documents')->get();
+        $recent     = Document::with('category')->latest()->take(5)->get();
+        $catStats   = Category::withCount('documents')->get();
 
         return view('documents.create-page', compact('categories', 'recent', 'catStats'));
     }
@@ -55,7 +58,10 @@ class DocumentController extends Controller
         Document::create($validated);
 
         return redirect()->route('documents.index')
-            ->with('success', 'Document submission logged successfully.');
+            ->with('notify', [
+                'message' => 'Document submission logged successfully.',
+                'type'    => 'success',
+            ]);
     }
 
     public function edit(Document $document)
@@ -77,7 +83,10 @@ class DocumentController extends Controller
         $document->update($validated);
 
         return redirect()->route('documents.index')
-            ->with('success', 'Document updated successfully.');
+            ->with('notify', [
+                'message' => 'Document updated successfully.',
+                'type'    => 'success',
+            ]);
     }
 
     public function destroy(Document $document)
@@ -85,6 +94,9 @@ class DocumentController extends Controller
         $document->delete();
 
         return redirect()->route('documents.index')
-            ->with('success', 'Document deleted successfully.');
+            ->with('notify', [
+                'message' => 'Document deleted successfully.',
+                'type'    => 'success',
+            ]);
     }
 }

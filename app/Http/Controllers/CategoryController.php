@@ -16,13 +16,12 @@ class CategoryController extends Controller
                   ->orWhere('description', 'like', '%' . $request->search . '%');
         }
 
-        $categories = $query->latest()->get();
+        $categories = $query->latest()->paginate(10)->withQueryString();
 
-        $catStats = Category::selectRaw('color, count(*) as count, name')
-            ->groupBy('color', 'name')
-            ->get();
+        // Separate full collection for stat cards (always top 5 regardless of page)
+        $statCategories = Category::withCount('documents')->latest()->get();
 
-        return view('categories.index', compact('categories', 'catStats'));
+        return view('categories.index', compact('categories', 'statCategories'));
     }
 
     public function create()
@@ -43,7 +42,10 @@ class CategoryController extends Controller
         Category::create($validated);
 
         return redirect()->route('categories.index')
-            ->with('success', 'Category "' . $validated['name'] . '" created successfully.');
+            ->with('notify', [
+                'message' => 'Category "' . $validated['name'] . '" created successfully.',
+                'type'    => 'success',
+            ]);
     }
 
     public function edit(Category $category)
@@ -64,7 +66,10 @@ class CategoryController extends Controller
         $category->update($validated);
 
         return redirect()->route('categories.index')
-            ->with('success', 'Category "' . $validated['name'] . '" updated successfully.');
+            ->with('notify', [
+                'message' => 'Category "' . $validated['name'] . '" updated successfully.',
+                'type'    => 'success',
+            ]);
     }
 
     public function destroy(Category $category)
@@ -73,6 +78,9 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('categories.index')
-            ->with('success', 'Category "' . $name . '" deleted successfully.');
+            ->with('notify', [
+                'message' => 'Category "' . $name . '" deleted successfully.',
+                'type'    => 'success',
+            ]);
     }
 }
