@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
-
+use App\Http\Controllers\AuditLogController;
 
 
 Route::get('/', function () {
@@ -26,9 +26,7 @@ Route::resource('categories', CategoryController::class)->except(['show']);
 Route::resource('documents', DocumentController::class)->except(['show']);
 
 // Audit Logs
-Route::get('/audit-logs', function () {
-    return view('auditlogs.index');
-})->name('audit-logs.index');
+Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
 
 // Profile
 Route::get('/profile', function () {

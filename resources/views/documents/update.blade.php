@@ -201,14 +201,12 @@
                 <h3 class="text-base font-semibold text-red-600">Danger Zone</h3>
             </div>
             <p class="text-xs text-gray-400 mb-4">Deleting this record is permanent and cannot be undone.</p>
-            <form method="POST" action="{{ route('documents.destroy', $document) }}"
-                onsubmit="return confirm('Delete this submission? This cannot be undone.')">
-                @csrf @method('DELETE')
-                <button type="submit"
-                    class="w-full bg-red-50 text-red-700 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-100 transition border border-red-200">
-                    🗑 Delete Submission
-                </button>
-            </form>
+            <x-ui.delete-button
+                :action="route('documents.destroy', $document)"
+                :name="$document->faculty_name"
+                label="🗑 Delete Submission"
+                size="md"
+                class="w-full justify-center" />
         </div>
 
     </div>

@@ -135,14 +135,9 @@ $totalDocs = $statCategories->sum('documents_count');
                                 class="px-3 py-1.5 text-xs font-semibold bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition">
                                 Edit
                             </a>
-                            <form method="POST" action="{{ route('categories.destroy', $cat) }}"
-                                onsubmit="return confirm('Delete category \'{{ $cat->name }}\'? This cannot be undone.')">
-                                @csrf @method('DELETE')
-                                <button type="submit"
-                                    class="px-3 py-1.5 text-xs font-semibold bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition">
-                                    Delete
-                                </button>
-                            </form>
+                            <x-ui.delete-button
+                                :action="route('categories.destroy', $cat)"
+                                :name="$cat->name" />
                         </div>
                     </td>
                 </tr>
@@ -169,7 +164,6 @@ $totalDocs = $statCategories->sum('documents_count');
         </table>
     </div>
 
-    {{-- Pagination --}}
     <x-ui.pagination :paginator="$categories" />
 </div>
 

@@ -42,9 +42,7 @@ $statusMeta = [
     @foreach($statusMeta as $key => $meta)
     <a href="{{ route('documents.index') }}?status={{ $key }}"
         class="stat-card bg-white rounded-2xl border {{ $meta['border'] }} p-4 {{ request('status') === $key ? 'ring-2 ring-offset-1 ring-university-red' : '' }}">
-        <p class="text-2xl font-black {{ $meta['text'] }}">
-            {{ $statusCounts[$key] ?? 0 }}
-        </p>
+        <p class="text-2xl font-black {{ $meta['text'] }}">{{ $statusCounts[$key] ?? 0 }}</p>
         <p class="text-xs text-gray-500 font-medium mt-0.5">{{ $meta['label'] }}</p>
     </a>
     @endforeach
@@ -52,8 +50,7 @@ $statusMeta = [
 
 {{-- Filters --}}
 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-6 animate-fade-up-delay-1">
-    <form method="GET" action="{{ route('documents.index') }}"
-        class="flex flex-wrap gap-3 items-center">
+    <form method="GET" action="{{ route('documents.index') }}" class="flex flex-wrap gap-3 items-center">
         <div class="relative flex-1 min-w-48">
             <svg class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
@@ -66,18 +63,14 @@ $statusMeta = [
             class="border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-university-red/20 focus:border-university-red">
             <option value="">All Categories</option>
             @foreach($categories as $cat)
-                <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
-                    {{ $cat->name }}
-                </option>
+                <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
             @endforeach
         </select>
         <select name="status"
             class="border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-university-red/20 focus:border-university-red">
             <option value="">All Status</option>
             @foreach(['submitted', 'reviewed', 'approved', 'rejected'] as $s)
-                <option value="{{ $s }}" {{ request('status') == $s ? 'selected' : '' }}>
-                    {{ ucfirst($s) }}
-                </option>
+                <option value="{{ $s }}" {{ request('status') == $s ? 'selected' : '' }}>{{ ucfirst($s) }}</option>
             @endforeach
         </select>
         <button type="submit"
@@ -166,14 +159,9 @@ $statusMeta = [
                                 class="px-3 py-1.5 text-xs font-semibold bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition">
                                 Edit
                             </a>
-                            <form method="POST" action="{{ route('documents.destroy', $doc) }}"
-                                onsubmit="return confirm('Delete this submission? This cannot be undone.')">
-                                @csrf @method('DELETE')
-                                <button type="submit"
-                                    class="px-3 py-1.5 text-xs font-semibold bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition">
-                                    Delete
-                                </button>
-                            </form>
+                            <x-ui.delete-button
+                                :action="route('documents.destroy', $doc)"
+                                :name="$doc->faculty_name . ' — ' . ($doc->category?->name ?? 'document')" />
                         </div>
                     </td>
                 </tr>
@@ -200,7 +188,6 @@ $statusMeta = [
         </table>
     </div>
 
-    {{-- Pagination --}}
     <x-ui.pagination :paginator="$documents" />
 </div>
 
