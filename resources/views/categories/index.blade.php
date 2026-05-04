@@ -49,14 +49,15 @@ $totalDocs = $statCategories->sum('documents_count');
 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8 animate-fade-up-delay-1">
     @foreach($statCategories->take(5) as $stat)
     @php $sc = $statColors[$stat->color] ?? $statColors['blue']; @endphp
-    <div class="stat-card bg-white rounded-2xl shadow-sm p-4 border-t-4 {{ $sc['border'] }}">
+    <a href="{{ route('categories.index') }}?search={{ urlencode($stat->name) }}"
+        class="stat-card bg-white rounded-2xl shadow-sm p-4 border-t-4 {{ $sc['border'] }} {{ request('search') === $stat->name ? 'ring-2 ring-offset-1 ring-university-red' : '' }}">
         <p class="text-3xl font-black {{ $sc['text'] }}">{{ $stat->documents_count ?? 0 }}</p>
         <p class="text-xs text-gray-500 mt-1 font-medium truncate">{{ $stat->name }}</p>
         <div class="mt-3 h-1 bg-gray-100 rounded-full">
             <div class="h-1 {{ $sc['bar'] }} rounded-full transition-all duration-700"
                 style="width: {{ $totalDocs > 0 ? round(($stat->documents_count / $totalDocs) * 100) : 0 }}%"></div>
         </div>
-    </div>
+    </a>
     @endforeach
 </div>
 @endif
