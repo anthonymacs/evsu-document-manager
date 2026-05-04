@@ -7,8 +7,8 @@
     init() {
         @if(session()->has('notify'))
             this.showNotification(
-                '{{ session('notify.message') }}',
-                '{{ session('notify.type', 'success') }}'
+                @js(session('notify.message')),
+                @js(session('notify.type', 'success'))
             );
         @endif
 

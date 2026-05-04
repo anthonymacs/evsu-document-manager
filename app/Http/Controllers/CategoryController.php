@@ -71,7 +71,7 @@ class CategoryController extends Controller
                 'type'    => 'success',
             ]);
     }
-
+    
     public function destroy(Category $category)
     {
         $name = $category->name;

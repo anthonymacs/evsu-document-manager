@@ -15,6 +15,7 @@
 </head>
 
 <body class="bg-gray-50 font-sans antialiased">
+
     <div x-data="adminLayout()" @resize.window="onResize()" class="flex h-screen overflow-hidden">
 
         <div x-show="sidebarOpen" x-cloak @click="sidebarOpen = false"
@@ -36,10 +37,10 @@
         <livewire:auth.logout />
         <x-ui.confirmation-modal />
 
-        {{-- Toast Notification (only once, inside body) --}}
-        <x-ui.toast />
-
     </div>
+    {{-- ^^^ adminLayout() div closes HERE. Toast is OUTSIDE it below. --}}
+
+    <x-ui.toast />
 
     @stack('scripts')
     <script>
