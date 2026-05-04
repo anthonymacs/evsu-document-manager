@@ -18,7 +18,7 @@
     <a href="{{ route('homepage') }}"
         class="flex items-center justify-center h-20 border-b border-red-900 flex-shrink-0 hover:bg-black/10 transition-colors duration-200">
         <div class="flex items-center space-x-3">
-            <img src="{{ asset('images/logo.jpg') }}" alt="EVSU Logo" class="w-12 h-12"
+            <img src="{{ asset('images/eeevsu.jpg') }}" alt="EVSU Logo" class="w-12 h-12"
                 style="border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.3); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
             <span x-show="!sidebarCollapsed" x-transition class="text-2xl font-bold">
                 DocHub

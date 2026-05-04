@@ -4,7 +4,7 @@
             <!-- Brand -->
             <a wire:navigate href="{{ route('home') }}" class="flex items-center space-x-3 hover:opacity-90 transition-opacity">
                 <div class="h-10 w-10 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="EVSU Logo" class="h-full w-full object-cover">
+                    <img src="{{ asset('images/eeevsu.jpg') }}" alt="EVSU Logo" class="h-full w-full object-cover">
                 </div>
                 <div class="flex flex-col">
                     <span class="text-lg font-bold leading-none">EVSU Reader</span>

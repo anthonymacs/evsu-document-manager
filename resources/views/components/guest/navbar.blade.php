@@ -6,7 +6,7 @@
                 class="flex items-center space-x-2 sm:space-x-4 hover:opacity-90 transition-opacity min-w-0">
                 <div
                     class="h-9 w-9 sm:h-12 sm:w-12 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-lg border-2 border-white/20 shrink-0">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="EVSU Logo" class="h-full w-full object-cover">
+                    <img src="{{ asset('images/eeevsu.jpg') }}" alt="EVSU Logo" class="h-full w-full object-cover">
                 </div>
                 <div class="flex flex-col justify-center min-w-0">
                     <h1 class="text-base sm:text-xl font-bold text-white tracking-wide leading-none truncate">EVSU Reader</h1>
