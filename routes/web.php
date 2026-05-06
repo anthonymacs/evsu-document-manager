@@ -28,10 +28,10 @@ Route::resource('documents', DocumentController::class)->except(['show']);
 // Audit Logs
 Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
 
-// Profile
-Route::get('/profile', function () {
+// About
+Route::get('/about', function () {
     return view('dashboard.index');
-})->name('profile');
+})->name('about');
 
 // Users
 Route::get('/users', function () {

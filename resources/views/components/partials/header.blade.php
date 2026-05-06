@@ -42,7 +42,7 @@
                         <p class="text-xs text-gray-500 truncate">admin@evsu.edu.ph</p>
                     </div>
                     
-                    <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                    <a href="{{ route('about') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">About</a>
                     <hr class="my-1">
                     
                     <button type="button"
