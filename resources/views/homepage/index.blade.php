@@ -278,7 +278,7 @@
 
     {{-- ── LOGO BANNER (above header) ── --}}
     <div style="background: var(--crimson); padding: 20px 48px; display: flex; align-items: center; gap: 16px;">
-        <img src="{{ asset('images/logo.jpg') }}" alt="EVSU Logo"
+        <img src="{{ asset('images/eeevsu.jpg') }}" alt="EVSU Logo"
             style="width: 64px; height: 64px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255,255,255,0.4); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
         <div>
             <div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; line-height: 1.1;">Faculty Document Manager</div>
