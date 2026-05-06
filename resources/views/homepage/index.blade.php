@@ -49,21 +49,6 @@
             flex-direction: column;
         }
 
-        /* ── HEADER ── */
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 48px;
-            height: 72px;
-            background: var(--warm-white);
-            border-bottom: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
         .logo-group { display: flex; align-items: center; gap: 14px; }
 
         .logo-seal {
@@ -290,22 +275,20 @@
 <body>
 <div class="page-wrapper">
 
+
+    {{-- ── LOGO BANNER (above header) ── --}}
+    <div style="background: var(--crimson); padding: 20px 48px; display: flex; align-items: center; gap: 16px;">
+        <img src="{{ asset('images/logo.jpg') }}" alt="EVSU Logo"
+            style="width: 64px; height: 64px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255,255,255,0.4); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+        <div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; line-height: 1.1;">Faculty Document Manager</div>
+            <div style="font-size: 11px; color: rgba(255,255,255,0.7); letter-spacing: 0.08em; text-transform: uppercase;">Eastern Visayas State University</div>
+        </div>
+    </div>
+
+
     {{-- ── HEADER ── --}}
     <header>
-        <div class="logo-group">
-            <div class="logo-seal">FD</div>
-            <div class="logo-text">
-                <span class="brand">Faculty DocManager</span>
-                <span class="tagline">Document Submission Portal</span>
-            </div>
-        </div>
-
-        <nav>
-            <a href="#features">Features</a>
-            <a href="#">Help</a>
-            <a href="#">Contact</a>
-        </nav>
-
     </header>
 
     {{-- ── HERO ── --}}
@@ -321,7 +304,7 @@
 
             <p class="hero-desc">
                 A centralized hub for submitting, tracking, and managing faculty documents —
-                from syllabi and clearances to teaching loads and performance reviews.
+                from syllabus and clearances to teaching loads and performance reviews.
                 Streamlined. Secure. Reliable.
             </p>
 
@@ -330,13 +313,6 @@
                     Launch System
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
-                <a href="#features" class="btn-learn">
-                    Learn more
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 8v4M12 16h.01"/>
                     </svg>
                 </a>
             </div>
