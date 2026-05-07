@@ -14,12 +14,7 @@ class NativeAppServiceProvider implements ProvidesPhpIni
      */
     public function boot(): void
     {
-        // ✅ Auto-run migrations on every app boot
-        Artisan::call('migrate', [
-            '--force'    => true,
-            '--database' => 'nativephp',
-        ]);
-
+ 
         Window::open();
     }
 

@@ -6,12 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    protected $connection = 'nativephp';
-
     public function up(): void
     {
-        if (!Schema::connection('nativephp')->hasTable('documents')) {
-            Schema::connection('nativephp')->create('documents', function (Blueprint $table) {
+            Schema::create('documents', function (Blueprint $table) {
                 $table->id();
                 $table->string('faculty_name');
                 $table->foreignId('category_id')->constrained()->nullOnDelete();
@@ -20,11 +17,10 @@ return new class extends Migration
                 $table->date('submission_date');
                 $table->timestamps();
             });
-        }
     }
 
     public function down(): void
     {
-        Schema::connection('nativephp')->dropIfExists('documents');
+        Schema::dropIfExists('documents');
     }
 };

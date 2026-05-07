@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuditLog extends Model
 {
-    protected $connection = 'nativephp';
-
     protected $fillable = [
         'subject_type',
         'subject_id',

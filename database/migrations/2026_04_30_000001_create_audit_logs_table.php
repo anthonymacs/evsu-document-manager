@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::connection('nativephp')->create('audit_logs', function (Blueprint $table) {
+        Schema::create('audit_logs', function (Blueprint $table) {
             $table->id();
             $table->string('subject_type');          // 'Document' or 'Category'
             $table->unsignedBigInteger('subject_id');
@@ -21,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::connection('nativephp')->dropIfExists('audit_logs');
+        Schema::dropIfExists('audit_logs');
     }
 };

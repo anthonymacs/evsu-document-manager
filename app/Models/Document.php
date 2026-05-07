@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
-    protected $connection = 'nativephp';
-
     protected $fillable = [
         'faculty_name',
         'category_id',

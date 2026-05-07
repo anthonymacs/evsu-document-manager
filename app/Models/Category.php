@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $connection = 'nativephp'; // ✅ add this
-
     protected $fillable = [
         'name',
         'description',
@@ -15,7 +13,6 @@ class Category extends Model
         'status',
     ];
 
-    // ✅ add this relationship
     public function documents()
     {
         return $this->hasMany(Document::class);
