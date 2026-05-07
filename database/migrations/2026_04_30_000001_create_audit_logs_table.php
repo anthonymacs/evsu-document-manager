@@ -10,11 +10,11 @@ return new class extends Migration
     {
         Schema::create('audit_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('subject_type');          // 'Document' or 'Category'
+            $table->string('subject_type');         
             $table->unsignedBigInteger('subject_id');
-            $table->string('action');                // created, updated, deleted
+            $table->string('action');
             $table->string('description');
-            $table->json('changes')->nullable();     // old vs new values
+            $table->json('changes')->nullable();     
             $table->timestamps();
         });
     }
