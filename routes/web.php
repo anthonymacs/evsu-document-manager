@@ -6,17 +6,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\AuditLogController;
 
-
-Route::get('/', function () {
-    return view('homepage.index');
-})->name('homepage');
-
-// Optional: redirect /home to dashboard
-Route::get('/home', function () {
-    return redirect()->route('dashboard.index');
-})->name('home');
-
 // Dashboard
+Route::get('/', function () {
+    return redirect()->route('dashboard.index');
+})->name('dashboard');
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 // Categories
