@@ -13,7 +13,7 @@ class CategoryController extends Controller
 
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('description', 'like', '%' . $request->search . '%');
+                ->orWhere('description', 'like', '%' . $request->search . '%');
         }
 
         $categories = $query->latest()->paginate(10)->withQueryString();
@@ -71,9 +71,16 @@ class CategoryController extends Controller
                 'type'    => 'success',
             ]);
     }
-
     public function destroy(Category $category)
     {
+        if ($category->documents()->count() > 0) {
+            return redirect()->route('categories.index')
+                ->with('notify', [
+                    'message' => 'Cannot delete "' . $category->name . '" — it has ' . $category->documents()->count() . ' document(s) attached.',
+                    'type'    => 'error',
+                ]);
+        }
+
         $name = $category->name;
         $category->delete();
 
