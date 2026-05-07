@@ -8,24 +8,20 @@ use Illuminate\Support\Facades\Artisan;
 
 class NativeAppServiceProvider implements ProvidesPhpIni
 {
-    /**
-     * Executed once the native application has been booted.
-     * Use this method to open windows, register global shortcuts, etc.
-     */
     public function boot(): void
     {
-        // ✅ Auto-run migrations on every app boot
         Artisan::call('migrate', [
             '--force'    => true,
             '--database' => 'nativephp',
         ]);
 
-        Window::open();
+        Window::open()
+            ->title('Faculty Document Manager')
+            ->width(1200)
+            ->height(800)
+            ->showDevTools(false);   // ← add this
     }
 
-    /**
-     * Return an array of php.ini directives to be set.
-     */
     public function phpIni(): array
     {
         return [];
