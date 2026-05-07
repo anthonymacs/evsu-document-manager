@@ -25,10 +25,9 @@ class DocumentController extends Controller
         }
 
         $documents   = $query->paginate(10)->withQueryString();
-        $categories  = Category::orderBy('name')->get();
+        $categories  = Category::where('status', 'active')->orderBy('name')->get();
         $total       = Document::count();
 
-        // Counts per status across ALL records (not just current page)
         $statusCounts = Document::selectRaw('status, count(*) as count')
             ->groupBy('status')
             ->pluck('count', 'status');
@@ -38,7 +37,7 @@ class DocumentController extends Controller
 
     public function create()
     {
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::where('status', 'active')->orderBy('name')->get();
         $recent     = Document::with('category')->latest()->take(5)->get();
         $catStats   = Category::withCount('documents')->get();
 
@@ -49,7 +48,7 @@ class DocumentController extends Controller
     {
         $validated = $request->validate([
             'faculty_name'    => 'required|string|max:255',
-            'category_id'     => 'required|exists:categories,id',
+            'category_id'     => 'required|exists:nativephp.categories,id', // ✅ FIX: specify nativephp connection
             'status'          => 'required|in:submitted,reviewed,approved,rejected',
             'remarks'         => 'nullable|string',
             'submission_date' => 'required|date',
@@ -66,7 +65,13 @@ class DocumentController extends Controller
 
     public function edit(Document $document)
     {
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::where('status', 'active')->orderBy('name')->get();
+
+        // If the document's current category is inactive, still include it so the form doesn't break
+        if ($document->category && $document->category->status !== 'active') {
+            $categories = $categories->prepend($document->category);
+        }
+
         return view('documents.update', compact('document', 'categories'));
     }
 
@@ -74,7 +79,7 @@ class DocumentController extends Controller
     {
         $validated = $request->validate([
             'faculty_name'    => 'required|string|max:255',
-            'category_id'     => 'required|exists:categories,id',
+            'category_id'     => 'required|exists:nativephp.categories,id', // ✅ FIX: specify nativephp connection
             'status'          => 'required|in:submitted,reviewed,approved,rejected',
             'remarks'         => 'nullable|string',
             'submission_date' => 'required|date',
