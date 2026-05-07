@@ -338,7 +338,7 @@
                             <div class="doc-type-dot" style="background:#3B82F6;"></div>
                             <div>
                                 <div class="dt-label">CSR</div>
-                                <div class="dt-sub">Community Service Record</div>
+                                <div class="dt-sub">Certificate of Service Rendered</div>
                             </div>
                         </div>
                         <div class="doc-type-item">

@@ -69,6 +69,21 @@
                     <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
                         Document Category <span class="text-red-500">*</span>
                     </label>
+
+                    {{-- Warning if current category is inactive --}}
+                    @if($document->category && $document->category->status !== 'active')
+                        <div class="flex items-start gap-2 p-3 bg-yellow-50 border border-yellow-200 rounded-xl mb-2">
+                            <svg class="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                            </svg>
+                            <p class="text-xs text-yellow-700">
+                                The current category <strong>"{{ $document->category->name }}"</strong> is inactive.
+                                Please select an active category or
+                                <a href="{{ route('categories.edit', $document->category) }}" class="underline font-semibold">reactivate it →</a>
+                            </p>
+                        </div>
+                    @endif
+
                     <select name="category_id"
                         class="w-full px-4 py-2.5 bg-gray-50 border @error('category_id') border-red-400 @else border-gray-200 @enderror rounded-xl text-sm focus:ring-2 focus:ring-university-red/20 focus:border-university-red outline-none transition-all">
                         <option value="">-- Select Category --</option>
@@ -76,6 +91,7 @@
                             <option value="{{ $cat->id }}"
                                 {{ old('category_id', $document->category_id) == $cat->id ? 'selected' : '' }}>
                                 {{ $cat->name }}
+                                @if($cat->status !== 'active') (inactive) @endif
                             </option>
                         @endforeach
                     </select>
