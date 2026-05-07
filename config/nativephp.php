@@ -2,11 +2,11 @@
 
 return [
     'version' => env('NATIVEPHP_APP_VERSION', '1.0.0'),
-    'app_id' => env('NATIVEPHP_APP_ID', 'com.nativephp.app'),
+    'app_id' => env('NATIVEPHP_APP_ID', 'com.evsu.facultydocumentmanager'),
     'deeplink_scheme' => env('NATIVEPHP_DEEPLINK_SCHEME'),
     'author' => env('NATIVEPHP_APP_AUTHOR'),
     'copyright' => env('NATIVEPHP_APP_COPYRIGHT'),
-    'description' => env('NATIVEPHP_APP_DESCRIPTION', 'An awesome app built with NativePHP'),
+    'description' => env('NATIVEPHP_APP_DESCRIPTION', 'Faculty Document Manager'),
     'website' => env('NATIVEPHP_APP_WEBSITE', 'https://nativephp.com'),
     'provider' => \App\Providers\NativeAppServiceProvider::class,
 
@@ -36,7 +36,7 @@ return [
     ],
 
     'updater' => [
-        'enabled' => env('NATIVEPHP_UPDATER_ENABLED', true),
+        'enabled' => env('NATIVEPHP_UPDATER_ENABLED', false), // ← false since single PC
         'default' => env('NATIVEPHP_UPDATER_PROVIDER', 'spaces'),
         'providers' => [
             'github' => [
@@ -81,7 +81,7 @@ return [
     ],
 
     'prebuild' => [
-        'npm run build',
+        'npm run build',          // ← compiles all CSS/JS into public/build/
         'php artisan optimize',
         'php artisan view:cache',
         'php artisan event:cache',
@@ -91,9 +91,6 @@ return [
         'php artisan optimize:clear',
         'php artisan view:clear',
         'php artisan cache:clear',
-        'rm -rf public/build/.vite',
-        'rm -rf node_modules',
-        'rm -rf tests',
     ],
 
     'binary_path' => env('NATIVEPHP_PHP_BINARY_PATH', null),
