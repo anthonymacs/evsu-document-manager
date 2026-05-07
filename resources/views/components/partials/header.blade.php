@@ -10,7 +10,7 @@
                 </svg>
             </button>
 
-            <h1 class="text-xl font-semibold text-gray-800">Document Hub</h1>
+            <h1 class="text-xl font-semibold text-gray-800">Faculty Document Manager</h1>
         </div>
 
         <div class="flex items-center space-x-4">
@@ -44,12 +44,6 @@
                     
                     <a href="{{ route('about') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">About</a>
                     <hr class="my-1">
-                    
-                    <button type="button"
-                        @click="userMenuOpen = false"
-                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        Logout
-                    </button>
                 </div>
             </div>
         </div>
