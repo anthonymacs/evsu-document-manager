@@ -21,7 +21,7 @@
             <img src="{{ asset('images/eeevsu.jpg') }}" alt="EVSU Logo" class="w-12 h-12"
                 style="border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.3); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
             <span x-show="!sidebarCollapsed" x-transition class="text-2xl font-bold">
-                DocHub
+            Log Track
             </span>
         </div>
     </a>

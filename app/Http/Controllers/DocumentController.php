@@ -48,7 +48,7 @@ class DocumentController extends Controller
     {
         $validated = $request->validate([
             'faculty_name'    => 'required|string|max:255',
-            'category_id'     => 'required|exists:nativephp.categories,id', // ✅ FIX: specify nativephp connection
+            'category_id'     => 'required|exists:nativephp.categories,id', 
             'status'          => 'required|in:submitted,reviewed,approved,rejected',
             'remarks'         => 'nullable|string',
             'submission_date' => 'required|date',
@@ -67,7 +67,7 @@ class DocumentController extends Controller
     {
         $categories = Category::where('status', 'active')->orderBy('name')->get();
 
-        // If the document's current category is inactive, still include it so the form doesn't break
+        
         if ($document->category && $document->category->status !== 'active') {
             $categories = $categories->prepend($document->category);
         }
@@ -79,7 +79,7 @@ class DocumentController extends Controller
     {
         $validated = $request->validate([
             'faculty_name'    => 'required|string|max:255',
-            'category_id'     => 'required|exists:nativephp.categories,id', // ✅ FIX: specify nativephp connection
+            'category_id'     => 'required|exists:nativephp.categories,id', 
             'status'          => 'required|in:submitted,reviewed,approved,rejected',
             'remarks'         => 'nullable|string',
             'submission_date' => 'required|date',

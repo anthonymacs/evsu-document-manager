@@ -18,7 +18,7 @@ class CategoryController extends Controller
 
         $categories = $query->latest()->paginate(10)->withQueryString();
 
-        // Separate full collection for stat cards (always top 5 regardless of page)
+        
         $statCategories = Category::withCount('documents')->latest()->get();
 
         return view('categories.index', compact('categories', 'statCategories'));
