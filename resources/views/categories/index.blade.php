@@ -46,8 +46,8 @@ $totalDocs = $statCategories->sum('documents_count');
 
 {{-- Stat Cards --}}
 @if($statCategories->count())
-<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8 animate-fade-up-delay-1">
-    @foreach($statCategories->take(5) as $stat)
+<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mb-8 animate-fade-up-delay-1">
+    @foreach($statCategories->take(6) as $stat)
     @php $sc = $statColors[$stat->color] ?? $statColors['blue']; @endphp
     <a href="{{ route('categories.index') }}?search={{ urlencode($stat->name) }}"
         class="stat-card bg-white rounded-2xl shadow-sm p-4 border-t-4 {{ $sc['border'] }} {{ request('search') === $stat->name ? 'ring-2 ring-offset-1 ring-university-red' : '' }}">

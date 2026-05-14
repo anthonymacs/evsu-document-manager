@@ -46,3 +46,5 @@ Route::get('/uploads', function () {
 Route::get('/read-later', function () {
     return view('dashboard.index');
 })->name('read-later.index');
+
+Route::get('/about', fn() => view('about.index'))->name('about');
