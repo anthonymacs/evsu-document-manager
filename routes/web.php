@@ -13,7 +13,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/login',  [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 });
- 
+
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout')->middleware('auth');
 
 // Dashboard
@@ -33,11 +33,12 @@ Route::resource('documents', DocumentController::class)->except(['show']);
 Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
 
 // About
-Route::get('/about', function () {
-    return view('dashboard.index');
-})->name('about');
+Route::get('/about', fn() => view('about.index'))->name('about');
 
 // Backup
+Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
+Route::post('/backup', [BackupController::class, 'store'])->name('backup.store');
+Route::post('/backup/restore', [BackupController::class, 'restore'])->name('backup.restore');
 
 // Users
 Route::get('/users', function () {
@@ -54,14 +55,6 @@ Route::get('/uploads', function () {
     return view('dashboard.index');
 })->name('uploads.index');
 
-// Read Later
 Route::get('/read-later', function () {
     return view('dashboard.index');
 })->name('read-later.index');
-
-Route::get('/about', fn() => view('about.index'))->name('about');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/backups',          [BackupController::class, 'index'])->name('backup.index');
-    Route::post('/backups/restore', [BackupController::class, 'restore'])->name('backup.restore');
-});

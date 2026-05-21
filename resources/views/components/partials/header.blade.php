@@ -44,7 +44,7 @@
                     
                     <a href="{{ route('about') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">About</a>
                     <hr class="my-1">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Backup</a>
+                    <a href="{{ route('backup.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Backup</a>
                     <hr class="my-1">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
