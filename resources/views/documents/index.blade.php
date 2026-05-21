@@ -29,25 +29,6 @@
     </a>
 </div>
 
-{{-- Quick Stats --}}
-@php
-$statusMeta = [
-    'submitted' => ['label' => 'Submitted', 'bg' => 'bg-yellow-50', 'border' => 'border-yellow-200', 'text' => 'text-yellow-700'],
-    'reviewed'  => ['label' => 'Reviewed',  'bg' => 'bg-blue-50',   'border' => 'border-blue-200',   'text' => 'text-blue-700'],
-    'approved'  => ['label' => 'Approved',  'bg' => 'bg-green-50',  'border' => 'border-green-200',  'text' => 'text-green-700'],
-    'rejected'  => ['label' => 'Rejected',  'bg' => 'bg-red-50',    'border' => 'border-red-200',    'text' => 'text-red-700'],
-];
-@endphp
-<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6 animate-fade-up-delay-1">
-    @foreach($statusMeta as $key => $meta)
-    <a href="{{ route('documents.index') }}?status={{ $key }}"
-        class="stat-card bg-white rounded-2xl border {{ $meta['border'] }} p-4 {{ request('status') === $key ? 'ring-2 ring-offset-1 ring-university-red' : '' }}">
-        <p class="text-2xl font-black {{ $meta['text'] }}">{{ $statusCounts[$key] ?? 0 }}</p>
-        <p class="text-xs text-gray-500 font-medium mt-0.5">{{ $meta['label'] }}</p>
-    </a>
-    @endforeach
-</div>
-
 {{-- Filters --}}
 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-6 animate-fade-up-delay-1">
     <form method="GET" action="{{ route('documents.index') }}" class="flex flex-wrap gap-3 items-center">

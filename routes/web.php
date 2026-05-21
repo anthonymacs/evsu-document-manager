@@ -5,6 +5,16 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\AuditLogController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BackupController;
+
+// ── AUTH ROUTES ──
+Route::middleware('guest')->group(function () {
+    Route::get('/login',  [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
+});
+ 
+Route::post('/logout', [LoginController::class, 'destroy'])->name('logout')->middleware('auth');
 
 // Dashboard
 Route::get('/', function () {
@@ -27,6 +37,8 @@ Route::get('/about', function () {
     return view('dashboard.index');
 })->name('about');
 
+// Backup
+
 // Users
 Route::get('/users', function () {
     return view('dashboard.index');
@@ -48,3 +60,8 @@ Route::get('/read-later', function () {
 })->name('read-later.index');
 
 Route::get('/about', fn() => view('about.index'))->name('about');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/backups',          [BackupController::class, 'index'])->name('backup.index');
+    Route::post('/backups/restore', [BackupController::class, 'restore'])->name('backup.restore');
+});
