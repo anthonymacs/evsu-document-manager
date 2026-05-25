@@ -10,8 +10,8 @@ class NativeAppServiceProvider implements ProvidesPhpIni
 {
     public function boot(): void
     {
-        // Backup database every time app starts
-        Artisan::call('db:backup');
+
+        $this->backupDatabase();
 
         Window::open()
             ->title('Faculty Document Manager')
@@ -23,5 +23,14 @@ class NativeAppServiceProvider implements ProvidesPhpIni
     public function phpIni(): array
     {
         return [];
+    }
+
+    private function backupDatabase(): void
+    {
+        $hour = now()->hour;
+
+        if ($hour >= 6 && $hour < 12) {
+            Artisan::call('db:backup');
+        }
     }
 }

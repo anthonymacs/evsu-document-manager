@@ -48,7 +48,7 @@ class DocumentController extends Controller
     {
         $validated = $request->validate([
             'faculty_name'    => 'required|string|max:255',
-            'category_id'     => 'required|exists:nativephp.categories,id', 
+            'category_id'     => 'required|exists:categories,id',
             'status'          => 'required|in:submitted,reviewed,approved,rejected',
             'remarks'         => 'nullable|string',
             'submission_date' => 'required|date',
@@ -79,7 +79,7 @@ class DocumentController extends Controller
     {
         $validated = $request->validate([
             'faculty_name'    => 'required|string|max:255',
-            'category_id'     => 'required|exists:nativephp.categories,id', 
+            'category_id'     => 'required|exists:categories,id', 
             'status'          => 'required|in:submitted,reviewed,approved,rejected',
             'remarks'         => 'nullable|string',
             'submission_date' => 'required|date',

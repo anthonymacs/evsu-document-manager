@@ -6,55 +6,74 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\BackupController;
+use Carbon\Carbon;
 
-// ── AUTH ROUTES ──
+// Home
+Route::get('/', function () {
+    return redirect()->route('login');
+});
+
+// Guest Routes (Only accessible when NOT logged in)
 Route::middleware('guest')->group(function () {
-    Route::get('/login',  [LoginController::class, 'create'])->name('login');
+
+    // Login Page
+    Route::get('/login', [LoginController::class, 'create'])
+        ->name('login');
+
+    // Login Submit
     Route::post('/login', [LoginController::class, 'store']);
 });
 
-Route::post('/logout', [LoginController::class, 'destroy'])->name('logout')->middleware('auth');
+// Protected Routes (Must login first)
+Route::middleware('auth')->group(function () {
 
-// Dashboard
-Route::get('/', function () {
-    return redirect()->route('dashboard.index');
-})->name('dashboard');
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard.index');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    // Categories
+    Route::resource('categories', CategoryController::class)
+        ->except(['show']);
 
-// Categories
-Route::resource('categories', CategoryController::class)->except(['show']);
+    // Documents
+    Route::resource('documents', DocumentController::class)
+        ->except(['show']);
 
-// Documents
-Route::resource('documents', DocumentController::class)->except(['show']);
+    // Audit Logs
+    Route::get('/audit-logs', [AuditLogController::class, 'index'])
+        ->name('audit-logs.index');
 
-// Audit Logs
-Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
+    // About
+    Route::get('/about', fn() => view('about.index'))
+        ->name('about');
 
-// About
-Route::get('/about', fn() => view('about.index'))->name('about');
+    // Users
+    Route::get('/users', function () {
+        return view('dashboard.index');
+    })->name('users.index');
 
-// Backup
-Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
-Route::post('/backup', [BackupController::class, 'store'])->name('backup.store');
-Route::post('/backup/restore', [BackupController::class, 'restore'])->name('backup.restore');
+    // Approvals
+    Route::get('/approvals', function () {
+        return view('dashboard.index');
+    })->name('approvals.index');
 
-// Users
-Route::get('/users', function () {
-    return view('dashboard.index');
-})->name('users.index');
+    // Uploads
+    Route::get('/uploads', function () {
+        return view('dashboard.index');
+    })->name('uploads.index');
 
-// Approvals
-Route::get('/approvals', function () {
-    return view('dashboard.index');
-})->name('approvals.index');
+    // Read Later
+    Route::get('/read-later', function () {
+        return view('dashboard.index');
+    })->name('read-later.index');
 
-// Uploads
-Route::get('/uploads', function () {
-    return view('dashboard.index');
-})->name('uploads.index');
+    // Debug
+    Route::get('/debug', function () {
+        dd(Carbon::now());
+    });
+});
 
-Route::get('/read-later', function () {
-    return view('dashboard.index');
-})->name('read-later.index');
+// Logout
+Route::post('/logout', [LoginController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');

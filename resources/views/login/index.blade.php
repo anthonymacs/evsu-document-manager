@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — Faculty Document Manager</title>
+    <title>Login — LogTrack</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -251,9 +251,8 @@
 
             {{-- ── CARD HEADER ── --}}
             <div class="card-header">
-                <div class="seal">LogTrack</div>
                 <div>
-                    <div class="ht-title">Faculty Document Manager</div>
+                    <div class="ht-title">LogTrack - Faculty Document Manager</div>
                     <div class="ht-sub">Eastern Visayas State University</div>
                 </div>
             </div>
@@ -270,7 +269,7 @@
 
                     {{-- User ID --}}
                     <div class="field">
-                        <label for="user_id">User ID</label>
+                        <label for="user_id">Username</label>
                         <div class="field-wrap">
                             <span class="field-icon">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -284,7 +283,7 @@
                                 id="user_id"
                                 name="user_id"
                                 value="{{ old('user_id') }}"
-                                placeholder="e.g. XXXX-2026"
+                                placeholder="e.g. Reyes"
                                 autocomplete="username"
                                 autofocus
                                 class="{{ $errors->has('user_id') ? 'is-invalid' : '' }}"
