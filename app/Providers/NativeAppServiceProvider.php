@@ -14,10 +14,12 @@ class NativeAppServiceProvider implements ProvidesPhpIni
         $this->backupDatabase();
 
         Window::open()
-            ->title('Faculty Document Manager')
-            ->width(1200)
-            ->height(800)
-            ->showDevTools(false);
+            ->title('LogTrack - Faculty Document Manager')
+            ->width(1280)
+            ->height(720)
+            ->maximized()
+            ->showDevTools(false)
+            ->hideMenu();
     }
 
     public function phpIni(): array

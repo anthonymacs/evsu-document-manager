@@ -6,7 +6,7 @@ return [
     'deeplink_scheme' => env('NATIVEPHP_DEEPLINK_SCHEME'),
     'author' => env('NATIVEPHP_APP_AUTHOR'),
     'copyright' => env('NATIVEPHP_APP_COPYRIGHT'),
-    'description' => env('NATIVEPHP_APP_DESCRIPTION', 'Faculty Document Manager'),
+    'description' => env('NATIVEPHP_APP_DESCRIPTION', 'LogTrack - Faculty Document Manager'),
     'website' => env('NATIVEPHP_APP_WEBSITE', 'https://nativephp.com'),
     'provider' => \App\Providers\NativeAppServiceProvider::class,
 
@@ -81,16 +81,12 @@ return [
     ],
 
     'prebuild' => [
-        'npm run build',          // ← compiles all CSS/JS into public/build/
-        'php artisan optimize',
-        'php artisan view:cache',
-        'php artisan event:cache',
+        'php artisan optimize:clear',
+        'npm run build',
     ],
 
     'postbuild' => [
-        'php artisan optimize:clear',
-        'php artisan view:clear',
-        'php artisan cache:clear',
+        'php artisan optimize',
     ],
 
     'binary_path' => env('NATIVEPHP_PHP_BINARY_PATH', null),
