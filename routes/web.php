@@ -13,7 +13,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// Guest Routes (Only accessible when NOT logged in)
+// Guest Routes
 Route::middleware('guest')->group(function () {
 
     // Login Page
@@ -24,7 +24,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [LoginController::class, 'store']);
 });
 
-// Protected Routes (Must login first)
+// Protected Routes 
 Route::middleware('auth')->group(function () {
 
     // Dashboard

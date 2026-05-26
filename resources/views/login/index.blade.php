@@ -28,6 +28,21 @@
             overflow-x: hidden;
         }
 
+        /* ── LAYER 1: background image ── */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url('{{ asset('images/bgc.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.10;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── LAYER 2: radial gradient overlay (sits above image) ── */
         body::before {
             content: '';
             position: fixed;
@@ -36,36 +51,12 @@
                 radial-gradient(circle at 15% 20%, rgba(139,26,26,0.06) 0%, transparent 50%),
                 radial-gradient(circle at 85% 80%, rgba(139,26,26,0.05) 0%, transparent 50%);
             pointer-events: none;
-            z-index: 0;
-        }
-
-        .logo-banner {
-            background: var(--crimson);
-            padding: 20px 48px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            position: relative;
             z-index: 1;
-        }
-        .logo-banner img {
-            width: 64px; height: 64px;
-            object-fit: cover; border-radius: 50%;
-            border: 3px solid rgba(255,255,255,0.4);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        .logo-banner .brand-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px; font-weight: 900; color: white; line-height: 1.1;
-        }
-        .logo-banner .brand-sub {
-            font-size: 11px; color: rgba(255,255,255,0.7);
-            letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px;
         }
 
         .page-wrapper {
-            position: relative; z-index: 1;
-            min-height: calc(100vh - 104px);
+            position: relative; z-index: 2;
+            min-height: 100vh;
             display: flex; align-items: center; justify-content: center;
             padding: 48px 24px;
         }
@@ -85,15 +76,6 @@
             padding: 24px 28px;
             display: flex; align-items: center; gap: 14px;
         }
-        .card-header .seal {
-            width: 48px; height: 48px; border-radius: 50%;
-            border: 2.5px solid rgba(255,255,255,0.35);
-            overflow: hidden; flex-shrink: 0;
-            background: rgba(255,255,255,0.15);
-            display: flex; align-items: center; justify-content: center;
-            color: white; font-family: 'Playfair Display', serif;
-            font-weight: 900; font-size: 15px;
-        }
         .card-header .ht-title {
             font-family: 'Playfair Display', serif;
             font-size: 17px; font-weight: 700; color: #fff; line-height: 1.1;
@@ -104,21 +86,6 @@
         }
 
         .card-body { padding: 28px 28px 24px; }
-
-        .role-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(139,26,26,0.08);
-            border: 1px solid rgba(139,26,26,0.2);
-            padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
-        }
-        .role-badge .dot {
-            width: 6px; height: 6px; background: var(--crimson);
-            border-radius: 50%; animation: pulse 2s infinite;
-        }
-        .role-badge span {
-            font-size: 11px; font-weight: 600; color: var(--crimson);
-            letter-spacing: 0.06em; text-transform: uppercase;
-        }
 
         .card-body h2 {
             font-family: 'Playfair Display', serif;
@@ -149,7 +116,7 @@
             padding: 11px 12px 11px 40px;
             font-family: 'DM Sans', sans-serif;
             font-size: 14px; color: var(--text-dark);
-            background: var(--cream);
+            background: #faf7f2;
             border: 1.5px solid rgba(139,26,26,0.18);
             border-radius: 8px; outline: none;
             transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
@@ -220,18 +187,7 @@
             display: flex; align-items: center; justify-content: center; gap: 6px;
             background: rgba(250,247,242,0.6);
         }
-        .card-footer svg { color: var(--crimson); flex-shrink: 0; }
         .card-footer span { font-size: 12px; color: var(--text-muted); }
-        .card-footer strong { color: var(--text-mid); font-weight: 600; }
-
-        footer {
-            position: relative; z-index: 1;
-            padding: 20px 48px;
-            display: flex; align-items: center; justify-content: space-between;
-            max-width: 1280px; margin: 0 auto; width: 100%;
-        }
-        footer p { font-size: 12px; color: var(--text-muted); }
-        footer p strong { color: var(--crimson); }
 
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -245,7 +201,6 @@
 </head>
 <body>
 
-    {{-- ── PAGE WRAPPER ── --}}
     <div class="page-wrapper">
         <div class="login-card">
 
@@ -267,7 +222,7 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    {{-- User ID --}}
+                    {{-- Username --}}
                     <div class="field">
                         <label for="user_id">Username</label>
                         <div class="field-wrap">
